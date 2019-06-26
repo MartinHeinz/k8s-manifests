@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: blog
+  labels:
+    io.kompose.service: backend
+  name: backend
+spec:
+  ports:
+  - name: "1234"
+    port: 1234
+    targetPort: 1234
+  selector:
+    io.kompose.service: backend
+status:
+  loadBalancer: {}

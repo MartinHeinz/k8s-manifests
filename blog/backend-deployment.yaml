@@ -1,0 +1,33 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  namespace: blog
+  labels:
+    io.kompose.service: backend
+  name: backend
+spec:
+  replicas: 1
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: backend
+    spec:
+      containers:
+      - image: martinheinz/blog_backend:latest
+        livenessProbe:
+          exec:
+            command:
+            - curl
+            - -f
+            - backend
+          failureThreshold: 5
+          periodSeconds: 30
+          timeoutSeconds: 10
+        name: backend
+        ports:
+        - containerPort: 1234
+        resources: {}
+      restartPolicy: Always
+status: {}
